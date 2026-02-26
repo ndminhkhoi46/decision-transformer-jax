@@ -27,6 +27,22 @@ Reproduction of 'Decision Transformer: Reinforcement Learning via Sequence Model
 
 Alternatively, you can set up the project using auto-generated `requirements-cpu.txt` or `requirement-gpu.txt`: e.g. `pip install -r requirements-gpu.txt` (tested in python=3.8, cudatoolkit=11.1, cudnn=8.2)
 
+### Downloading the Dataset
+
+The training script expects the [Atari DQN replay dataset](https://research.google/tools/datasets/dqn-replay/) to be available locally. To download it, first install [gsutil](https://cloud.google.com/storage/docs/gsutil_install), then run:
+
+```bash
+bash scripts/download_dataset.sh [GAME] [DATA_DIR] [NUM_BUFFERS]
+```
+
+For example, to download all 50 replay buffer checkpoints for Breakout into the default directory:
+
+```bash
+bash scripts/download_dataset.sh Breakout /data/minimal-atari-replay-dataset 50
+```
+
+This downloads the last `NUM_BUFFERS` (1–50) replay buffer checkpoints from `gs://atari-replay-datasets/dqn/{GAME}/1/replay_logs/` and places them under `{DATA_DIR}/{GAME}/1/replay_logs/`.
+
 ### Training
 
 Run `cd dt_jax && bash run.sh` to train the model.
